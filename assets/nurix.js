@@ -2,7 +2,7 @@
   'use strict';
 
   var API_URL = 'https://agentx-us.nurixlabs.tech/voice/outbound-call';
-  var AGENT_ID = 'fb466fac-ed15-4ca0-bca2-fcc21f49cf81-draft';
+  var AGENT_ID = 'fb466fac-ed15-4ca0-bca2-fcc21f49cf81';
   var WORKSPACE_ID = 'e3d23869-60c0-4191-8852-08e67de83a39';
 
   function wireCallMeButton() {
