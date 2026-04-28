@@ -1,0 +1,69 @@
+(function () {
+  'use strict';
+
+  var CREW_API_URL = 'https://zero-us.nurixlabs.tech/voice/outbound-call';
+  var CREW_ID = 'fb466fac-ed15-4ca0-bca2-fcc21f49cf81';
+  var WORKSPACE_ID = 'a3d403b8-8b8b-484b-95bd-dc2034dd2807';
+
+  function wireCallMeButton() {
+    var btn = document.getElementById('please_call_me');
+    var nameInput = document.getElementById('name_input');
+    var phoneInput = document.getElementById('phone_input');
+    var statusEl = document.getElementById('callMeStatus');
+    if (!btn || !nameInput || !phoneInput || !statusEl) return;
+
+    btn.addEventListener('click', async function () {
+      if (btn.disabled) return;
+
+      var name = nameInput.value.trim();
+      var phone = phoneInput.value.trim();
+
+      if (!name) { nameInput.focus(); return; }
+      if (!phone) { phoneInput.focus(); return; }
+
+      var originalHTML = btn.innerHTML;
+      btn.disabled = true;
+      btn.textContent = 'Placing your call…';
+
+      statusEl.classList.add('d-none');
+      statusEl.classList.remove('status-success', 'status-error');
+      statusEl.textContent = '';
+
+      try {
+        var resp = await fetch(CREW_API_URL, {
+          method: 'POST',
+          headers: {
+            'workspace-id': WORKSPACE_ID,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            crew_id: CREW_ID,
+            number: phone,
+            custom_dynamic_variables_config: {
+              CustomerName: name,
+            },
+          }),
+        });
+
+        if (!resp.ok) throw new Error('Request failed: ' + resp.status);
+
+        statusEl.textContent =
+          'You’ll receive a call from Nurix Electronics shortly.';
+        statusEl.classList.remove('d-none');
+        statusEl.classList.add('status-success');
+        btn.textContent = 'Call Requested';
+      } catch (err) {
+        console.error('Error:', err);
+        statusEl.textContent = 'Something went wrong. Please try again.';
+        statusEl.classList.remove('d-none');
+        statusEl.classList.add('status-error');
+        btn.disabled = false;
+        btn.innerHTML = originalHTML;
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    wireCallMeButton();
+  });
+})();
