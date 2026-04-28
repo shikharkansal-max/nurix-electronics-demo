@@ -62,8 +62,9 @@ body {
 }
 
 .brand-logo {
-  height: 32px;
+  height: 28px;
   width: auto;
+  display: block;
 }
 
 .badge-live {
@@ -221,6 +222,12 @@ body {
   font-weight: 600;
   color: var(--text-secondary);
   letter-spacing: 0.2px;
+}
+
+.field-hint {
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 4px;
 }
 
 .form-input {

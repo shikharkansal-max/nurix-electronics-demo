@@ -9,6 +9,7 @@
     var btn = document.getElementById('please_call_me');
     var nameInput = document.getElementById('name_input');
     var phoneInput = document.getElementById('phone_input');
+    var transferInput = document.getElementById('transfer_input');
     var statusEl = document.getElementById('callMeStatus');
     if (!btn || !nameInput || !phoneInput || !statusEl) return;
 
@@ -17,6 +18,7 @@
 
       var name = nameInput.value.trim();
       var phone = phoneInput.value.trim();
+      var transfer = transferInput ? transferInput.value.trim() : '';
 
       if (!name) { nameInput.focus(); return; }
       if (!phone) { phoneInput.focus(); return; }
@@ -29,6 +31,9 @@
       statusEl.classList.remove('status-success', 'status-error');
       statusEl.textContent = '';
 
+      var dynamicVars = { CustomerName: name };
+      if (transfer) dynamicVars.TransferNumber = transfer;
+
       try {
         var resp = await fetch(CREW_API_URL, {
           method: 'POST',
@@ -39,9 +44,7 @@
           body: JSON.stringify({
             crew_id: CREW_ID,
             number: phone,
-            custom_dynamic_variables_config: {
-              CustomerName: name,
-            },
+            custom_dynamic_variables_config: dynamicVars,
           }),
         });
 
