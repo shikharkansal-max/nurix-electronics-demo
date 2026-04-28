@@ -1,7 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 56" width="320" height="56" role="img" aria-label="Nurix Electronics">
-  <g font-family="Inter, -apple-system, Segoe UI, sans-serif">
-    <text x="0" y="32" font-size="26" font-weight="800" fill="#0a1f44" letter-spacing="-0.4">nurix</text>
-    <text x="76" y="32" font-size="26" font-weight="800" fill="#10b981" letter-spacing="-0.4">.</text>
-    <text x="86" y="32" font-size="26" font-weight="500" fill="#64748b" letter-spacing="-0.2">electronics</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 44" width="220" height="44" role="img" aria-label="Nurix Electronics">
+  <defs>
+    <linearGradient id="markGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#0a1f44"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <rect x="0" y="4" width="36" height="36" rx="9" fill="url(#markGrad)"/>
+    <path d="M22 11 L13 25 H19.5 L17 33 L27 21 H21 Z" fill="#10b981" stroke="#10b981" stroke-width="0.5" stroke-linejoin="round"/>
+  </g>
+  <g font-family="Inter, -apple-system, Segoe UI, sans-serif" fill="#0a1f44">
+    <text x="48" y="24" font-size="19" font-weight="800" letter-spacing="-0.4">Nurix</text>
+    <text x="48" y="37" font-size="9.5" font-weight="600" letter-spacing="2.6" fill="#1e40af">ELECTRONICS</text>
   </g>
 </svg>
