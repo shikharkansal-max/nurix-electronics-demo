@@ -1,9 +1,9 @@
 (function () {
   'use strict';
 
-  var CREW_API_URL = 'https://zero-us.nurixlabs.tech/voice/outbound-call';
-  var CREW_ID = 'fb466fac-ed15-4ca0-bca2-fcc21f49cf81';
-  var WORKSPACE_ID = 'a3d403b8-8b8b-484b-95bd-dc2034dd2807';
+  var API_URL = 'https://agentx-us.nurixlabs.tech/voice/outbound-call';
+  var AGENT_ID = 'fb466fac-ed15-4ca0-bca2-fcc21f49cf81-draft';
+  var WORKSPACE_ID = 'e3d23869-60c0-4191-8852-08e67de83a39';
 
   function wireCallMeButton() {
     var btn = document.getElementById('please_call_me');
@@ -31,20 +31,20 @@
       statusEl.classList.remove('status-success', 'status-error');
       statusEl.textContent = '';
 
-      var dynamicVars = { CustomerName: name };
-      if (transfer) dynamicVars.TransferNumber = transfer;
-
       try {
-        var resp = await fetch(CREW_API_URL, {
+        var resp = await fetch(API_URL, {
           method: 'POST',
           headers: {
+            'accept': 'application/json',
             'workspace-id': WORKSPACE_ID,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            crew_id: CREW_ID,
+            agent_id: AGENT_ID,
             number: phone,
-            custom_dynamic_variables_config: dynamicVars,
+            custom_dynamic_variables_config: {
+              transfer_phone_number: transfer,
+            },
           }),
         });
 
